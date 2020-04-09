@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人博客</title>
+    <title>关于|班铃钦个人博客</title>
     <link rel="stylesheet" href="./css/header.css">
-    <link rel="stylesheet" href="./css/container.css">
+    <link rel="stylesheet" href="./css/about.css">
     <link rel="stylesheet" href="./css/footer.css">
 </head>
 <body>
@@ -15,8 +15,8 @@
             <ul>
                 <li><a href="#">首页</a></li>
                 <li><a href="sitemap.html">地图</a></li>
-                <li><a href="about.html">关于</a></li>
-                <li><a href="guestbook.html">留言</a></li>
+                <li><a href="#">关于</a></li>
+                <li><a href="#">留言</a></li>
             </ul>
             <div class="frombar">
                 <input type="text" placeholder="输入关键词查找">
@@ -26,32 +26,47 @@
     </header>
     <div class="container">
         <div class="content_left">
-            <div class="every_day">
-                <span>每日一句 ( 202049 )</span>
-                <p class="english">You were born with wings. Why prefer to crawl through life?</p>
-                <p class="chinese">你生而有翼，为何竟愿一生匍匐前行？<span>———— Rumi</span></p>
-            </div>
             <div class="article">
-                <p class="article_title">Laravel5.4安装passport时遇到的一些问题</p>
-                <p class="article_content">安装时可能不支持高版本，我使用了composer require laravel/passport ~4.0安装后执行迁移时nothing to migrate，需要手动注册Provider， 在config/app.php中providers中添加Laravel\Passport\PassportServiceProvider::class。执行php artisan passport:install时提示“There are no commands defined in the “passport” namespace.” 需要执行cache:clear和config:cache 更新缓存。...</p>
-                <div class="article_footer">发布于2019-12-06 |  浏览(5,487) | Tags：laravel</div>
+                <div class="user">
+                    <div class="title">关于我</div>
+                    <p>博主郑晓，性别男，卷葱省。
+    
+                        会修电脑的野生程序员
+                        认为PHP是世界上最好的语言
+                        花括号不换行
+                        7年PHP开发
+                    </p>
+                </div>
+                <div class="user">
+                    <div class="title">关于博客</div>
+                    <p>从2009年 – 今
+                        博主很懒+词穷，佛系更新…
+                        域名 zhengoo.cn -> zh30.com
+                        程序 tcms -> WordPress
+                        服务器 免费空间 -> 国内某收费空间 -> 国外vps -> 阿里云
+                        
+                        推荐便宜又稳定的xen-VPS吧: HostShare
+                        kvm vps:hostEONS 洛杉矶节点，我在用，速度可以，可以干一些羞羞的事。
+                    </p>
+                </div>
             </div>
-            <div class="article">
-                <p class="article_title">Laravel5.4安装passport时遇到的一些问题</p>
-                <p class="article_content">安装时可能不支持高版本，我使用了composer require laravel/passport ~4.0安装后执行迁移时nothing to migrate，需要手动注册Provider， 在config/app.php中providers中添加Laravel\Passport\PassportServiceProvider::class。执行php artisan passport:install时提示“There are no commands defined in the “passport” namespace.” 需要执行cache:clear和config:cache 更新缓存。...</p>
-                <div class="article_footer">发布于2019-12-06 |  浏览(5,487) | Tags：laravel</div>
-            </div>
-            <div class="article">
-                <p class="article_title">Laravel5.4安装passport时遇到的一些问题</p>
-                <p class="article_content">安装时可能不支持高版本，我使用了composer require laravel/passport ~4.0安装后执行迁移时nothing to migrate，需要手动注册Provider， 在config/app.php中providers中添加Laravel\Passport\PassportServiceProvider::class。执行php artisan passport:install时提示“There are no commands defined in the “passport” namespace.” 需要执行cache:clear和config:cache 更新缓存。...</p>
-                <div class="article_footer">发布于2019-12-06 |  浏览(5,487) | Tags：laravel</div>
-            </div>
-            <div class="article">
-                <p class="article_title">Laravel5.4安装passport时遇到的一些问题</p>
-                <p class="article_content">安装时可能不支持高版本，我使用了composer require laravel/passport ~4.0安装后执行迁移时nothing to migrate，需要手动注册Provider， 在config/app.php中providers中添加Laravel\Passport\PassportServiceProvider::class。执行php artisan passport:install时提示“There are no commands defined in the “passport” namespace.” 需要执行cache:clear和config:cache 更新缓存。...</p>
-                <div class="article_footer">发布于2019-12-06 |  浏览(5,487) | Tags：laravel</div>
+            <div class="comments">
+                <h3>关于：目前有68 条留言</h3>
+                <p>
+                    用户评论头像 园长瓜：发表于 2019年12月18日 21:53[回复]
+                    你的留言板是真的酷炫
+                </p>
+                <p>
+                    用户评论头像 园长瓜：发表于 2019年12月18日 21:53[回复]
+                    你的留言板是真的酷炫
+                </p>
+                <p>
+                    用户评论头像 园长瓜：发表于 2019年12月18日 21:53[回复]
+                    你的留言板是真的酷炫
+                </p>
             </div>
         </div>
+            
         <div class="content_right">
             <div class="right_module">
                 <div class="title">随机标签云</div>

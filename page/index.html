@@ -4,10 +4,189 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人博客</title>
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/container.css">
+    <link rel="stylesheet" href="./css/footer.css">
 </head>
 <body>
-    <header>头部信息</header>
-    <div class="container">内容区</div>
-    <footer>页底区域</footer>
+    <header class="navbar-header">
+        <div class="navbar">
+            <a href="#">班铃钦个人博客 | 技术博客</a>
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li><a href="#">地图</a></li>
+                <li><a href="#">关于</a></li>
+                <li><a href="#">留言</a></li>
+            </ul>
+            <div class="frombar">
+                <input type="text" placeholder="输入关键词查找">
+                <button>搜索</button>
+            </div>
+        </div>       
+    </header>
+    <div class="container">
+        <div class="content_left">
+            <div class="every_day">
+                <span>每日一句 ( 202049 )</span>
+                <p class="english">You were born with wings. Why prefer to crawl through life?</p>
+                <p class="chinese">你生而有翼，为何竟愿一生匍匐前行？<span>———— Rumi</span></p>
+            </div>
+            <div class="article">
+                <p class="article_title">Laravel5.4安装passport时遇到的一些问题</p>
+                <p class="article_content">安装时可能不支持高版本，我使用了composer require laravel/passport ~4.0安装后执行迁移时nothing to migrate，需要手动注册Provider， 在config/app.php中providers中添加Laravel\Passport\PassportServiceProvider::class。执行php artisan passport:install时提示“There are no commands defined in the “passport” namespace.” 需要执行cache:clear和config:cache 更新缓存。...</p>
+                <div class="article_footer">发布于2019-12-06 |  浏览(5,487) | Tags：laravel</div>
+            </div>
+            <div class="article">
+                <p class="article_title">Laravel5.4安装passport时遇到的一些问题</p>
+                <p class="article_content">安装时可能不支持高版本，我使用了composer require laravel/passport ~4.0安装后执行迁移时nothing to migrate，需要手动注册Provider， 在config/app.php中providers中添加Laravel\Passport\PassportServiceProvider::class。执行php artisan passport:install时提示“There are no commands defined in the “passport” namespace.” 需要执行cache:clear和config:cache 更新缓存。...</p>
+                <div class="article_footer">发布于2019-12-06 |  浏览(5,487) | Tags：laravel</div>
+            </div>
+            <div class="article">
+                <p class="article_title">Laravel5.4安装passport时遇到的一些问题</p>
+                <p class="article_content">安装时可能不支持高版本，我使用了composer require laravel/passport ~4.0安装后执行迁移时nothing to migrate，需要手动注册Provider， 在config/app.php中providers中添加Laravel\Passport\PassportServiceProvider::class。执行php artisan passport:install时提示“There are no commands defined in the “passport” namespace.” 需要执行cache:clear和config:cache 更新缓存。...</p>
+                <div class="article_footer">发布于2019-12-06 |  浏览(5,487) | Tags：laravel</div>
+            </div>
+            <div class="article">
+                <p class="article_title">Laravel5.4安装passport时遇到的一些问题</p>
+                <p class="article_content">安装时可能不支持高版本，我使用了composer require laravel/passport ~4.0安装后执行迁移时nothing to migrate，需要手动注册Provider， 在config/app.php中providers中添加Laravel\Passport\PassportServiceProvider::class。执行php artisan passport:install时提示“There are no commands defined in the “passport” namespace.” 需要执行cache:clear和config:cache 更新缓存。...</p>
+                <div class="article_footer">发布于2019-12-06 |  浏览(5,487) | Tags：laravel</div>
+            </div>
+        </div>
+        <div class="content_right">
+            <div class="right_module">
+                <div class="title">随机标签云</div>
+                <a href="#">cscs</a>
+                <a href="#">cscs</a>
+                <a href="#">cscs</a>
+                <a href="#">cscs</a>
+                <a href="#">cscs</a>
+                <a href="#">cscs</a>
+                <a href="#">cscs</a>
+                <a href="#">cscs</a>
+                <a href="#">cscs</a>
+                <a href="#">cscs</a>
+                <a href="#">cscs</a>
+                <a href="#">cscs</a>
+                <a href="#">cscs</a>
+                <a href="#">cscs</a>
+                <a href="#">cscs</a>
+                <a href="#">cscs</a>
+            </div>
+            <div class="right_module">
+                <div class="title">最近热门</div>
+                <ul>
+                    <li><a href="">ddsadsadsa</a></li>
+                    <li><a href="">ddsadsadsa</a></li>
+                    <li><a href="">ddsadsadsa</a></li>
+                    <li><a href="">ddsadsadsa</a></li>
+                    <li><a href="">ddsadsadsa</a></li>
+                    <li><a href="">ddsadsadsa</a></li>
+                    <li><a href="">ddsadsadsa</a></li>
+                    <li><a href="">ddsadsadsa</a></li>
+                    <li><a href="">ddsadsadsa</a></li>
+                    <li><a href="">ddsadsadsa</a></li>
+                </ul>
+            </div>
+            <div class="right_module pinglun">
+                <div class="title">最新评论</div>
+                <ul>
+                    <li>
+                        <p class="clearfix">
+                            <span class="left">hi</span>
+                            <span class="right">[2天前]</span>
+                        </p>
+                        <a href="">ddsadsadsa</a>
+                    </li>
+                    <li>
+                        <p class="clearfix">
+                            <span class="left">hi</span>
+                            <span class="right">[2天前]</span>
+                        </p>
+                        <a href="">ddsadsadsa</a>
+                    </li>
+                    <li>
+                        <p class="clearfix">
+                            <span class="left">hi</span>
+                            <span class="right">[2天前]</span>
+                        </p>
+                        <a href="">ddsadsadsa</a>
+                    </li>
+                    <li>
+                        <p class="clearfix">
+                            <span class="left">hi</span>
+                            <span class="right">[2天前]</span>
+                        </p>
+                        <a href="">ddsadsadsa</a>
+                    </li>
+                    <li>
+                        <p class="clearfix">
+                            <span class="left">hi</span>
+                            <span class="right">[2天前]</span>
+                        </p>
+                        <a href="">ddsadsadsa</a>
+                    </li>
+                    <li>
+                        <p class="clearfix">
+                            <span class="left">hi</span>
+                            <span class="right">[2天前]</span>
+                        </p>
+                        <a href="">ddsadsadsa</a>
+                    </li>
+                    <li>
+                        <p class="clearfix">
+                            <span class="left">hi</span>
+                            <span class="right">[2天前]</span>
+                        </p>
+                        <a href="">ddsadsadsa</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="right_module lianjie">
+                <div class="title">友情链接(不稳定的站可能会被我直接删除)</div>
+                <ul>
+                    <li><a href="">ddsadsadsa</a><a href="">ddsadsadsa</a></li>
+                    <li><a href="">ddsadsadsa</a><a href="">ddsadsadsa</a></li>
+                    <li><a href="">ddsadsadsa</a><a href="">ddsadsadsa</a></li>
+                    <li><a href="">ddsadsadsa</a><a href="">ddsadsadsa</a></li>
+                    <li><a href="">ddsadsadsa</a><a href="">ddsadsadsa</a></li>
+                    <li><a href="">ddsadsadsa</a><a href="">ddsadsadsa</a></li>
+                    <li><a href="">ddsadsadsa</a><a href="">ddsadsadsa</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <ul class="list-inline clearfix">
+            <li><a href="#">c/c++</a></li>
+            <li><a href="#">css/div</a></li>
+            <li><a href="#">java</a></li>
+            <li><a href="#">javascript</a></li>
+            <li><a href="#">liunx</a></li>
+            <li><a href="#">mac</a></li>
+            <li><a href="#">pc技术</a></li>
+            <li><a href="#">php</a></li>
+            <li><a href="#">python</a></li>
+            <li><a href="#">ubuntu</a></li>
+            <li><a href="#">c/c++</a></li>
+            <li><a href="#">css/div</a></li>
+            <li><a href="#">java</a></li>
+            <li><a href="#">javascript</a></li>
+            <li><a href="#">liunx</a></li>
+            <li><a href="#">mac</a></li>
+            <li><a href="#">pc技术</a></li>
+            <li><a href="#">php</a></li>
+            <li><a href="#">python</a></li>
+            <li><a href="#">ubuntu</a></li>
+        </ul>
+        <p>
+            Copyright © 2010-2020
+            <a href="#">班铃钦个人博客</a>
+            All rights reserved. 由免费开源的
+            <a href="#">WordPress</a>
+            强力驱动.
+            <a href="#">鲁ICP备14017955号</a>
+            <a href="#">站长统计</a>
+        </p>
+    </footer>
 </body>
 </html>

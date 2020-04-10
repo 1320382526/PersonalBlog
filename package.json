@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/1320382526/PersonalBlog#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
   }
 }

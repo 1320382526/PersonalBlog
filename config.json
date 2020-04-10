@@ -1,0 +1,5 @@
+{
+    "port" : 12306,
+    "page_path" : "page",
+    "web_path" : "web"
+}

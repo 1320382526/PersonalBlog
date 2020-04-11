@@ -34,9 +34,22 @@
             </div>
             <div id="article">
                 <div class="article" v-for="article in articleList">
-                    <p class="article_title">{{article.title}}</p>
+                    <p class="article_title"><a :href="'/blog_detail_page.html?blog_id='+article.id">{{article.title}}</a></p>
                     <p class="article_content">{{article.content}}</p>
                     <div class="article_footer">发布于{{article.date}} |  浏览({{article.views}}) | Tags：{{article.tags}}</div>
+                </div>
+                <div class="page_tool" v-if="count != 0">
+                    <ul>
+                        <li v-show="page != 1" @click="queryBlogByPage(1)"><a href="javascript: void (0)">首页</a></li>
+                        <li v-show="page != 1" @click="queryBlogByPage(page - 1)"><a href="javascript: void (0)">上一页</a></li>
+                        <li v-show="page - 2 > 0"  @click="queryBlogByPage(page - 2)"><a href="javascript: void (0)">{{page - 2}}</a></li>
+                        <li v-show="page - 1 > 0"  @click="queryBlogByPage(page - 1)"><a href="javascript: void (0)">{{page - 1}}</a></li>
+                        <li class="active"><a href="javascript: void (0)">{{page}}</a></li>
+                        <li v-show="page + 1 <= Math.ceil(count/pageSize)" @click="queryBlogByPage(page + 1)" ><a href="javascript: void (0)">{{page + 1}}</a></li>
+                        <li v-show="page + 2 <= Math.ceil(count/pageSize)" @click="queryBlogByPage(page + 2)"><a href="javascript: void (0)">{{page + 2}}</a></li>
+                        <li v-show="page != Math.ceil(count/pageSize)" @click="queryBlogByPage(page + 1)"><a href="javascript: void (0)">下一页</a></li>
+                        <li v-show="page != Math.ceil(count/pageSize)" @click="queryBlogByPage(Math.ceil(count/pageSize))"><a href="javascript: void (0)">尾页</a></li>
+                    </ul>
                 </div>
             </div>
             

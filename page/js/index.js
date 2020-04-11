@@ -14,60 +14,82 @@ var everyDay = new Vue({
     created(){
         //ajax获取每日一句内容
         fetch('/queryEveryDay').then(res => res.json())
-            .then(res => {this.content = res.data[0].content;
-                var d = new Date(Number(res.data[0].ctime));
-                this.ctime = "" + d.getFullYear() + (d.getMonth()+1) + d.getDate()
+            .then(res => {
+                if(res.data.length>0){
+                    this.content = res.data[0].content;
+                    var d = new Date(Number(res.data[0].ctime));
+                    this.ctime = "" + d.getFullYear() + (d.getMonth()+1) + d.getDate()
+                }
+                
             })
     }
 });
 
 
 //文章列表
-var everyDay = new Vue({
+var article = new Vue({
     el:'#article',
     data:{
-        articleList:[{
-            title:'Laravel5.4安装passport时遇到的一些问题',
-            content:'安装时可能不支持高版本，我使用了composer require laravel/passport ~4.0安装后执行迁移时nothing to migrate，需要手动注册Provider， 在config/app.php中providers中添加Laravel\Passport\PassportServiceProvider::class。执行php artisan passport:install时提示“There are no commands defined in the “passport” namespace.” 需要执行cache:clear和config:cache 更新缓存。...',
-            date:'2019-12-06',
-            views:'5,487',
-            tags:'test1 test2',
-            id:'1',
-            link:''
-        },{
-            title:'Laravel5.4安装passport时遇到的一些问题',
-            content:'安装时可能不支持高版本，我使用了composer require laravel/passport ~4.0安装后执行迁移时nothing to migrate，需要手动注册Provider， 在config/app.php中providers中添加Laravel\Passport\PassportServiceProvider::class。执行php artisan passport:install时提示“There are no commands defined in the “passport” namespace.” 需要执行cache:clear和config:cache 更新缓存。...',
-            date:'2019-12-06',
-            views:'5,487',
-            tags:'test1 test2',
-            id:'1',
-            link:''
-        },{
-            title:'Laravel5.4安装passport时遇到的一些问题',
-            content:'安装时可能不支持高版本，我使用了composer require laravel/passport ~4.0安装后执行迁移时nothing to migrate，需要手动注册Provider， 在config/app.php中providers中添加Laravel\Passport\PassportServiceProvider::class。执行php artisan passport:install时提示“There are no commands defined in the “passport” namespace.” 需要执行cache:clear和config:cache 更新缓存。...',
-            date:'2019-12-06',
-            views:'5,487',
-            tags:'test1 test2',
-            id:'1',
-            link:''
-        },{
-            title:'Laravel5.4安装passport时遇到的一些问题',
-            content:'安装时可能不支持高版本，我使用了composer require laravel/passport ~4.0安装后执行迁移时nothing to migrate，需要手动注册Provider， 在config/app.php中providers中添加Laravel\Passport\PassportServiceProvider::class。执行php artisan passport:install时提示“There are no commands defined in the “passport” namespace.” 需要执行cache:clear和config:cache 更新缓存。...',
-            date:'2019-12-06',
-            views:'5,487',
-            tags:'test1 test2',
-            id:'1',
-            link:''
-        }]
+        page: 1,
+        pageSize: 6,
+        count: 0,
+        articleList:[]
+    },
+    methods:{
+        queryBlogByPage(page){
+            if(page == this.page){
+                return;
+            }
+            if(page <= 1){
+                page = 1;
+            }
+            if(page >= Math.ceil(this.count/this.pageSize)){
+                page = Math.ceil(this.count/this.pageSize);
+            }
+            this.page = page;
+            fetch("/queryBlogByPage?page="+this.page+"&pageSize="+this.pageSize).then(res => res.json())
+            .then(res => {
+                var tempArr = [];
+                for(var i = 0; i < res.data.length; i++){
+                    tempArr.push({
+                        title: res.data[i].title,
+                        content: res.data[i].content,
+                        date: "" + (new Date(parseInt(res.data[i].ctime)).getFullYear()) +"-"+ (new Date(parseInt(res.data[i].ctime)).getMonth() + 1) +"-"+ (new Date(parseInt(res.data[i].ctime)).getDate()),
+                        views: res.data[i].views,
+                        id: res.data[i].id,
+                        tags: res.data[i].tags.split(',').join(' '),
+                        link: res.data[i].id,
+                    })
+                }
+                this.articleList = tempArr;
+            })
+        }
     },
     created(){
-        
+        fetch("/queryBlogByPage?page="+this.page+"&pageSize="+this.pageSize).then(res => res.json())
+            .then(res => {
+                if(res.data.length > 0){
+                    this.count = res.data[0].count;
+                }
+                
+                for(var i = 0; i < res.data.length; i++){
+                    this.articleList.push({
+                        title: res.data[i].title,
+                        content: res.data[i].content,
+                        date: "" + (new Date(parseInt(res.data[i].ctime)).getFullYear()) +"-"+ (new Date(parseInt(res.data[i].ctime)).getMonth() + 1) +"-"+ (new Date(parseInt(res.data[i].ctime)).getDate()),
+                        views: res.data[i].views,
+                        id: res.data[i].id,
+                        tags: res.data[i].tags.split(',').join(' '),
+                        link: res.data[i].id,
+                    })
+                }
+            })
     }
 })
 
 //随机标签云
 
-var everyDay = new Vue({
+var random_tags = new Vue({
     el:'#random_tags',
     data:{
         tags:['caccsc','sadsdasd','dsadadw','gregregre','caccsc','sadsdasd','dsadadw','gregregre','sadsdasd','dsadadw','gregregre','caccsc','sadsdasd','dsadadw','gregregre']

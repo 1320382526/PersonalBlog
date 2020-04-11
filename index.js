@@ -7,9 +7,14 @@ var app = new express();
 
 app.use(express.static('./page/'));   //静态文件请求
 
+app.get("/queryBlogById", loader.get('/queryBlogById'));
 app.get("/queryEveryDay", loader.get('/queryEveryDay'));
+app.get("/queryBlogByPage", loader.get('/queryBlogByPage'));
+
 app.post("/editEveryDay", loader.get('/editEveryDay'));
 app.post("/editBlog", loader.get('/editBlog'));
+
+
 app.listen(globalConfig.port, function () {
     console.log('服务器已启动')
 })  //监听端口

@@ -1,3 +1,4 @@
+var url = require('url');
 var blogDao = require('./../dao/BlogDao');
 var tagsDao = require('./../dao/tagsDao');
 var tagBlogMappingDao = require('./../dao/TagBlogMappingDao')
@@ -44,5 +45,36 @@ function insertTagBlog (tagId, blogId){
 }
 
 path.set('/editBlog', editBlog);
+
+
+function queryBlogByPage(request, response){
+    var page = parseInt(url.parse(request.url, true).query.page);
+    var pageSize = parseInt(url.parse(request.url, true).query.pageSize);
+    blogDao.queryBlog(page, pageSize, function (result){
+        
+        response.writeHead(200);
+        response.write(respUtil.writeResult('success','查询成功',result));
+        response.end();
+    })
+
+
+}
+
+path.set('/queryBlogByPage', queryBlogByPage);
+
+function queryBlogById(request, response){
+    var Id = url.parse(request.url, true).query.Id;
+    blogDao.queryBlogById(Id, function (result){
+        
+        response.writeHead(200);
+        response.write(respUtil.writeResult('success','查询成功',result));
+        response.end();
+    })
+
+
+}
+
+path.set('/queryBlogById', queryBlogById);
+
 
 module.exports.path = path;

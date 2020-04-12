@@ -32,7 +32,20 @@
                 <p class="blog_tags">作者: 班铃钦 分类: {{detail_blog.tags}} 发布于: {{detail_blog.ctime}} 01:06 浏览({{detail_blog.views}}) 评论(13)</p>
                 <div class="blog_content">{{ detail_blog.content }}</div>
             </div>
-            
+            <div class="comment" id="comment">
+                <h3 class="comment_title">发表评论</h3>
+                <p class="comment_user">
+                    <input id="user_name" type="text" placeholder="昵称">
+                    <input id="email" type="text" placeholder="邮箱 (评论被回复时你能收到通知)">
+                </p>
+                <p class="comment_content">
+                    <textarea id="comments" placeholder="无意义内容我可能不会回复你"></textarea>   
+                </p>
+                <p class="comment_code">
+                    <input type="text" placeholder="验证码">    
+                </p>
+                <button @click="addComment">提交留言</button>
+            </div>
             
         </div>
         <div class="content_right">

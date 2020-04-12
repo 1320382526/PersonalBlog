@@ -10,6 +10,7 @@ app.use(express.static('./page/'));   //静态文件请求
 app.get("/queryBlogById", loader.get('/queryBlogById'));
 app.get("/queryEveryDay", loader.get('/queryEveryDay'));
 app.get("/queryBlogByPage", loader.get('/queryBlogByPage'));
+app.get("/addComment", loader.get('/addComment'));
 
 app.post("/editEveryDay", loader.get('/editEveryDay'));
 app.post("/editBlog", loader.get('/editBlog'));

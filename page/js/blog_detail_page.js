@@ -36,7 +36,32 @@ var detail_blog = new Vue({
             })
     }
 });
+//留言
 
+var comment = new Vue({
+    el:'#comment',
+    data:{
+        
+    },
+    methods:{
+        addComment(){
+            var blog_id = detail_blog.detail_blog.id;
+            var user_name = document.getElementById('user_name').value;
+            var email = document.getElementById('email').value;
+            var comments = document.getElementById('comments').value;
+            fetch('/addComment?blog_id='+blog_id+'&user_name='+user_name+'&parent=-1&email='+email+'&comments='+comments).then(res => res.json())
+            .then(res => {
+                alert(res.msg)
+                document.getElementById('user_name').value('');
+                document.getElementById('email').value('');
+                document.getElementById('comments').value('');
+            })
+        }
+    },
+    created(){
+        
+    }
+});
 
 //随机标签云
 

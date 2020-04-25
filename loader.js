@@ -1,11 +1,10 @@
 var fs = require('fs');
 var globalConfig = require('./config.json');
-
 var controllerSet = [];
 var pathMap = new Map();
-
 var files = fs.readdirSync("./"+globalConfig.web_path);
 
+//解析所有请求
 for(var i = 0; i < files.length; i++) {
     var temp = require("./" + globalConfig.web_path + "/" +files[i]);
     if(temp.path){
@@ -20,4 +19,3 @@ for(var i = 0; i < files.length; i++) {
     }
 }
 module.exports = pathMap
-//console.log(pathMap)

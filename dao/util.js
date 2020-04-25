@@ -1,6 +1,7 @@
 var mysql = require('mysql')
 
 function createConnection() {
+    //链接mysql数据库配置
     var connection = mysql.createConnection({
         host: '127.0.0.1',
         port: '3306',

@@ -1,18 +1,27 @@
 var dbutil = require('./util');
 
+
+/**
+ * 
+ * @param {*} blog_id //博客id （-1）代表评论博主 （-2）代表留言
+ * @param {*} parent //回复父级评论id （-1）代表无
+ * @param {*} user_name //用户名字
+ * @param {*} comments //回复内容
+ * @param {*} email //用户邮箱
+ * @param {*} ctime //创建时间
+ * @param {*} utime //修改时间
+ * @param {*} success //成功时执行的方法
+ */
 function addComment(blog_id, parent, user_name, comments, email, ctime, utime, success){
-    var insertSql = "insert into comments (`blog_id`, `parent`, `user_name`, `comments`, `email`, `ctime`, `utime`) values (?,?,?,?,?,?,?)";
+    var sql = "insert into comments (`blog_id`, `parent`, `user_name`, `comments`, `email`, `ctime`, `utime`) values (?,?,?,?,?,?,?)";
     var params = [blog_id, parent, user_name, comments, email, ctime, utime];
     var connection = dbutil.createConnection();
     connection.connect();
-    connection.query(insertSql, params, function (error, result){
+    connection.query(sql, params, function (error, result){
         if(error == null){
-            console.log('1',params)
-            success(result);
-            
+            success(result);            
         }else{
-            console.log('2',params)
-            throw new Error('error')
+            throw new Error(error)
         }
     });
 
@@ -21,6 +30,30 @@ function addComment(blog_id, parent, user_name, comments, email, ctime, utime, s
 
 }
 
+/**
+ * 查询最新博客文章评论
+ * （-1）代表评论博主
+ * （-2）代表留言
+ * 
+ * @param {*} size //数量
+ * @param {*} success //成功时执行的方法
+ */
+function queryCommentsByTime(size, success) {
+    var sql = "select * from comments where blog_id != -1 and blog_id != -2 order by id desc limit ?;";
+    var params = [parseInt(size)];
+    var connection = dbutil.createConnection();
+    connection.connect();
+    connection.query(sql, params, function (error, result) {
+        if (error == null) {
+            console.log(error);
+        } else {
+            success(result);
+        }
+    });
+    connection.end();
+}
+
 module.exports = {
-    addComment
+    addComment,
+    queryCommentsByTime
 }

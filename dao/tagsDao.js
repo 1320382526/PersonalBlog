@@ -36,6 +36,7 @@ function insertTag (tag, ctime, utime, success) {
 function queryTag (tag, page, pageSize, success) {
     var sql = "select c.* from tags a left join tag_blog_mapping b on a.id = b.tag_id left join blog c on b.blog_id = c.id where a.tag = ? order by c.id desc limit ?, ?";
     var params = [tag, (page -1) * pageSize, pageSize];
+    console.log(params)
     var connection = dbUtil.createConnection();
     connection.connect();
     connection.query(sql, params, function (error, result){

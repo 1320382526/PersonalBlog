@@ -12,9 +12,9 @@ var dbutil = require('./util');
  * @param {*} utime //修改时间
  * @param {*} success //成功时执行的方法
  */
-function addComment(blog_id, parent, user_name, comments, email, ctime, utime, success){
-    var sql = "insert into comments (`blog_id`, `parent`, `user_name`, `comments`, `email`, `ctime`, `utime`) values (?,?,?,?,?,?,?)";
-    var params = [blog_id, parent, user_name, comments, email, ctime, utime];
+function addComment(blog_id, parent, user, user_name, comments, email, ctime, utime, success){
+    var sql = "insert into comments (`blog_id`, `parent`, `user`, `user_name`, `comments`, `email`, `ctime`, `utime`) values (?,?,?,?,?,?,?,?)";
+    var params = [blog_id, parent, user, user_name, comments, email, ctime, utime];
     var connection = dbutil.createConnection();
     connection.connect();
     connection.query(sql, params, function (error, result){
@@ -35,8 +35,8 @@ function addComment(blog_id, parent, user_name, comments, email, ctime, utime, s
  * （-1）代表评论博主
  * （-2）代表留言
  * 
- * @param {*} size //数量
- * @param {*} success //成功时执行的方法
+ * @param {*} size 数量
+ * @param {*} success 成功时执行的方法
  */
 function queryCommentsByTime(size, success) {
     var sql = "select * from comments where blog_id != -1 and blog_id != -2 order by id desc limit ?;";
@@ -45,9 +45,31 @@ function queryCommentsByTime(size, success) {
     connection.connect();
     connection.query(sql, params, function (error, result) {
         if (error == null) {
-            console.log(error);
-        } else {
             success(result);
+        } else {
+            throw new Error(error)
+        }
+    });
+    connection.end();
+}
+
+
+/**
+ * 根据blog_id查询评论
+ * 
+ * @param {*} blog_id 博客id（-1）回复博主 （-2）回复留言
+ * @param {*} success 成功时执行的方法
+ */
+function queryCommentsByBlogId(blog_id, success) {
+    var sql = "select * from comments where blog_id = ? order by id desc";
+    var params = [parseInt(blog_id)];
+    var connection = dbutil.createConnection();
+    connection.connect();
+    connection.query(sql, params, function (error, result) {
+        if (error == null) {
+            success(result);
+        } else {
+            throw new Error(error)
         }
     });
     connection.end();
@@ -55,5 +77,6 @@ function queryCommentsByTime(size, success) {
 
 module.exports = {
     addComment,
-    queryCommentsByTime
+    queryCommentsByTime,
+    queryCommentsByBlogId
 }

@@ -14,8 +14,8 @@ var path = new Map();
  */
 function addComment(request, response){
     request.on('data', function (data){
-        var dataInfo = JSON.parse(data.toString()).data; //数据体
-        commentDao.addComment(dataInfo.blog_id, dataInfo.parent, dataInfo.user_name, dataInfo.comments, dataInfo.email, timeUtil.getNow(), timeUtil.getNow(), function (result){
+        var dataInfo = JSON.parse(data.toString()); //数据体
+        commentDao.addComment(dataInfo.blog_id, dataInfo.parent, dataInfo.user, dataInfo.user_name, dataInfo.comments, dataInfo.email, timeUtil.getNow(), timeUtil.getNow(), function (result){
             response.writeHead(200);
             response.write(respUtil.writeResult('success','添加成功',null))
             response.end();
@@ -44,5 +44,17 @@ function getRandomCode(request, response){
     response.end(JSON.stringify(img));
 }
 path.set('/api/comment/getRandomCode', getRandomCode);
+
+
+//根据blog_id查询评论
+function queryCommentsByBlogId(request, response){
+    var blog_id = url.parse(request.url, true).query.blog_id;
+    commentDao.queryCommentsByBlogId(blog_id, function (result){
+        response.writeHead(200);
+        response.write(respUtil.writeResult('success','查询成功',result))
+        response.end();
+    })
+}
+path.set('/api/comment/queryCommentsByBlogId', queryCommentsByBlogId);
 
 module.exports.path = path;

@@ -39,7 +39,6 @@ function insertBlog(title, content, tags, views, ctime, utime, success){
 function queryBlog(page, pageSize, success){
     var sql = "select * from blog order by id desc limit ?, ?";
     var params = [(page -1) * pageSize, pageSize];
-    console.log(params)
     var connection = dbutil.createConnection();
     connection.connect();
     connection.query(sql, params, function (error, result){
@@ -167,6 +166,7 @@ function queryAllBlog(success) {
  */
 function queryBlogBySearch(search, page, pageSize, success) {
     var sql = "select * from blog where title like concat(concat('%', ?), '%') or content like concat(concat('%', ?), '%') order by id desc limit ?, ?;";
+    
     var params = [search, search, (page -1) * pageSize, pageSize];
     var connection = dbutil.createConnection();
     connection.connect();
@@ -187,7 +187,7 @@ function queryBlogBySearch(search, page, pageSize, success) {
  * @param {*} success //成功时执行的方法
  */
 function queryBlogBySearchCount(search, success) {  
-    var sql = "select count(1) as count from blog where title like \"%?%\" or content like \"%?%\";";
+    var sql = "select count(1) as count from blog where title like concat(concat('%', ?), '%') or content like concat(concat('%', ?), '%')";
     var params = [search, search];
     var connection = dbutil.createConnection();
     connection.connect();

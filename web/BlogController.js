@@ -57,10 +57,16 @@ path.set('/api/blog/insertBlog', insertBlog);
 function queryBlogByPage(request, response){
     var page = parseInt(url.parse(request.url, true).query.page);
     var pageSize = parseInt(url.parse(request.url, true).query.pageSize);
-    blogDao.queryBlog(page, pageSize, function (result){       
-        response.writeHead(200);
-        response.write(respUtil.writeResult('success','查询成功',result));
-        response.end();
+    blogDao.queryBlog(page, pageSize, function (resultAll){   
+        blogDao.queryBlogCount(function (resultCount){
+            var result = {
+                resultAll,
+                resultCount
+            }
+            response.writeHead(200);
+            response.write(respUtil.writeResult('success','查询成功',result));
+            response.end();
+        })       
     })
 }
 path.set('/api/blog/queryBlogByPage', queryBlogByPage);
@@ -116,22 +122,29 @@ path.set('/api/blog/queryAllBlog', queryAllBlog);
 function queryBlogBySearch(request, response){   
     var s = url.parse(request.url, true).query.s; //关键字
     var tag = url.parse(request.url, true).query.tag; //标签
-    console.log(url.parse(request.url, true))
+    var page = url.parse(request.url, true).query.page; //页码
+    var pageSize = url.parse(request.url, true).query.pageSize; //页容量
     if(s){
-        blogDao.queryBlogBySearch(s, function (resultAll){
+        blogDao.queryBlogBySearch(s, parseInt(page), parseInt(pageSize), function (resultAll){
             blogDao.queryBlogBySearchCount(s, function (resultCount){
-                resultAll.count = resultCount[0].count;
+                var result = {
+                    resultAll,
+                    resultCount
+                }
                 response.writeHead(200);
-                response.write(respUtil.writeResult('success','查询成功',resultAll));
+                response.write(respUtil.writeResult('success','查询成功',result));
                 response.end();
             })            
         })
     }else if(tag){
-        tagsDao.queryTag(tag, function (resultAll){
+        tagsDao.queryTag(tag, parseInt(page), parseInt(pageSize), function (resultAll){
             tagsDao.queryTagCount(tag, function (resultCount){
-                resultAll.count = resultCount[0].count;
+                var result = {
+                    resultAll,
+                    resultCount
+                }
                 response.writeHead(200);
-                response.write(respUtil.writeResult('success','查询成功',resultAll));
+                response.write(respUtil.writeResult('success','查询成功',result));
                 response.end();
             })            
         })

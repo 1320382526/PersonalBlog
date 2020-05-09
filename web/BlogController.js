@@ -15,23 +15,26 @@ var path = new Map();
  */
 function insertBlog(request, response){
     request.on('data', function (data){
-        var dataInfo = JSON.parse(data.toString()).data;
+        var dataInfo = JSON.parse(data.toString());
+        
         blogDao.insertBlog(dataInfo.title, dataInfo.content, dataInfo.tags, 0, timeUtil.getNow(), timeUtil.getNow(), function (result){
             response.writeHead(200);
             response.write(respUtil.writeResult('success','添加成功',null));
             response.end();
             //添加成功后续操作
             //添加标签，添加博客标签关系信息
+            
             var blogId = result.insertId;
             var tagList = dataInfo.tags.split(',');
+            
             for(var i = 0; i < tagList.length; i++){
-                queryTag(tagList[i], blogId);
+                queryByTag(tagList[i], blogId);
             }
         })
         
     });
-    function queryTag(tag, blogId){
-        tagsDao.queryTag(tag, function (result){
+    function queryByTag(tag, blogId){
+        tagsDao.queryByTag(tag, function (result){
             if(result == null || result.length == 0){
                 insertTag(tag, blogId);
             }else{

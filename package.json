@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/1320382526/PersonalBlog#readme",
   "dependencies": {
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
+    "connect-history-api-fallback": "^1.6.0",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
     "pm2": "^4.4.0",

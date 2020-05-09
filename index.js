@@ -1,18 +1,21 @@
 ﻿var express = require('express');   //引入express框架
 var globalConfig = require('./config.json'); //配置文件
-var loader = require("./loader")
+var loader = require("./loader");
+const history = require('connect-history-api-fallback');
+const {init} = require('./service/initBlog')
 
-var app = new express();
-
+var app = express();
+app.use(history());
 app.use(express.static('./page/'));   //请求的静态文件请求
+
 //设置允许跨域访问该服务.
-app.all('*', function (req, res, next) {
+/*app.all('*', function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     res.header('Access-Control-Allow-Methods', '*');
     res.header('Content-Type', 'application/json;charset=utf-8');
     next();
-});
+});*/
 
 app.get("/api/everyday/queryEveryDay", loader.get('/api/everyday/queryEveryDay'));  //查询每日一句
 app.post("/api/everyday/indertEveryDay", loader.get('/api/everyday/indertEveryDay')); //添加每日一句
@@ -31,12 +34,15 @@ app.get("/api/comment/queryCommentsByBlogId", loader.get('/api/comment/queryComm
 
 app.get("/api/tags/queryAllTags", loader.get('/api/tags/queryAllTags'));  //查询随机标签
 
+setInterval(init,1000*60*60*24);
+
+
 //匹配不到返回404.
-app.all('*', function (req, res) {
+/*app.all('*', function (req, res) {
     res.writeHead(400);
     res.write('<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>personal-blog</title></head><body><h1>很抱歉，您要访问的页面不存在！</h1></body></html>');
     res.end();
-});
+});*/
 
 
 

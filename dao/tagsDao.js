@@ -24,6 +24,28 @@ function insertTag (tag, ctime, utime, success) {
 }
 
 /**
+ * 根据标签tag查询
+ * 
+ * @param {*} tag //标签内容
+ * @param {*} success  //成功时执行的方法
+ */
+function queryByTag (tag, success) {    
+    var sql = "select * from tags where tag = ?";
+    var params = [tag];
+    var connection = dbUtil.createConnection();
+    connection.connect();
+    connection.query(sql, params, function (error, result){
+        if(error == null){
+            success(result);
+        }else{
+            throw new Error(error)
+        }
+    });
+    connection.end();
+}
+
+
+/**
  * 根据标签内容查询tag,左连接表tag_blog_mapping，blog
  * 获得blog数据
  * 
@@ -36,7 +58,6 @@ function insertTag (tag, ctime, utime, success) {
 function queryTag (tag, page, pageSize, success) {
     var sql = "select c.* from tags a left join tag_blog_mapping b on a.id = b.tag_id left join blog c on b.blog_id = c.id where a.tag = ? order by c.id desc limit ?, ?";
     var params = [tag, (page -1) * pageSize, pageSize];
-    console.log(params)
     var connection = dbUtil.createConnection();
     connection.connect();
     connection.query(sql, params, function (error, result){
@@ -84,7 +105,7 @@ function queryAllTags(success) {
     connection.connect();
     connection.query(sql, function (error, result) {
         if (error) {
-            console.log(error);
+            throw new Error(error)
         } else {
             success(result);
         }
@@ -95,6 +116,7 @@ function queryAllTags(success) {
 module.exports = {
     insertTag,
     queryTag,
+    queryByTag,
     queryAllTags,
     queryTagCount
      
